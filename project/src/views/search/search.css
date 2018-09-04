@@ -1,0 +1,68 @@
+.searchname{
+    margin-top:4rem;
+}
+.searchitem{
+    height: 3.5714rem;
+    line-height: 3.5714rem;
+    border-bottom: 1px solid #e5e5e5;
+  
+    color: #333;
+    font-size: 1.1429rem;
+    text-indent: .1786rem;
+}
+.zuijinhot
+{
+    height: 2.8571rem;
+    line-height: 2.8571rem;
+    padding-left: .8929rem;
+    border-bottom: 1px solid #ccc;
+    font-size: .8571rem;
+    color: #2ca3f5;
+}
+.search-input{
+    width: 70%;
+    padding: .4rem .0714rem .4rem 1.7rem;
+    margin-right: 3%;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.search-btn{
+    width: 17.25%;
+    height: 2.0714rem;
+    line-height: 2.0714rem;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+    text-align: center;
+}
+.hotitemzujianli{
+    width: 100%;
+    height: 4.0714rem;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    display: table;
+}
+.hotitemzujianli .hotitemzujiandiv{
+    width: 100%;
+    padding-right: 2.657rem;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: .3571rem;
+    cursor: pointer;
+    font-size: 1rem;
+    
+    box-sizing: border-box;
+}
+.search-result{
+    height: 1.5714rem;
+    line-height: 1.5714rem;
+    background: #e6e6e6;
+    padding-left: .9rem;
+    font-size: .7857rem;
+    color: #5d5d5d;
+}

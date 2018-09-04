@@ -1,0 +1,34 @@
+#goback{
+    position: relative;
+    z-index: 2;
+}
+#goback img{
+    width: 1.786rem;
+    height: 1.786rem;
+}
+.m-progress{
+    width:15rem;
+    left:1rem
+}
+.m-lyric p{
+    margin: 0;
+    line-height:1.7857rem;
+    font-size:.8571rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+.m-lyric{
+    margin-top:2rem;
+}
+.total-time{
+    margin-left:1rem
+}
+.m-play-control img{
+    width: 1.786rem;
+    height: 1.786rem;
+    margin:0 0.5rem
+}
+.m-play-control{
+    margin-top:0.5rem
+}

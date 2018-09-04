@@ -1,0 +1,133 @@
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import {formatTime} from './format'
+/* 
+  touchStart
+  touchMove
+  touchEnd
+*/
+export default class Controls extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      minX:0,
+      maxX: 0,
+      l: 0,
+      isMove: false
+    };
+    this.circle = React.createRef()
+    this.progress = React.createRef()
+  }
+  componentWillReceiveProps(nextProps){
+    let l = this.props.currentTime / this.props.duration * this.state.maxX;
+    if(!this.state.isMove){
+      this.setState({
+        l:l
+      })
+    }
+  }
+  componentDidMount() {
+    console.log(this.props)
+    this.setState({
+      maxX: this.progress.current.clientWidth - this.circle.current.offsetWidth
+    })
+  }
+  start = () => {
+    this.setState({
+      isMove: true
+    })
+  }
+  move = (e) => {
+    // 作用的手指的事件对象列表
+    console.log(e.changedTouches[0])
+    let react = this.progress.current.getBoundingClientRect().left;
+    let l = e.changedTouches[0].pageX - react - this.circle.current.offsetWidth / 2
+    
+    if (l < this.state.minX) l = this.state.minX;
+    if (l > this.state.maxX) l = this.state.maxX;
+
+    this.setState({
+      l:l
+    })
+
+  }
+  end = () => {
+    this.setState({
+      isMove: false
+    })
+
+    if (this.props.uodateCurrentTime){
+      let t = this.circle.current.offsetLeft / this.state.maxX * this.props.duration;
+      this.props.uodateCurrentTime(t)
+    }
+
+  }
+  progressStart = (e) => {
+    this.move(e);
+    // setState更新是异步的，所以要在数据更新之后，在获取元素的left
+    // 写在setState第二个参数的回调函数中
+    this.setState({
+      isMove: true
+    },() => {
+      console.log('hello')
+      if (this.props.uodateCurrentTime) {
+        let t = this.circle.current.offsetLeft / this.state.maxX * this.props.duration;
+        this.props.uodateCurrentTime(t)
+      }
+    })
+    
+  }
+  progressEnd = () => {
+    this.setState({
+      isMove: false
+    })
+  }
+  render() {
+
+    //let l = this.props.currentTime / this.props.duration * this.state.maxX
+
+    return (
+      <div>
+        
+        <div className="m-bottom">
+          {/* 柱球时间盒子 */}
+          <div className="m-progress-box">
+            <span className="current-time">{formatTime(this.props.currentTime)}</span>
+            <div 
+              className="m-progress" 
+              ref={this.progress}
+              onTouchStart={this.progressStart}
+              onTouchEnd={this.progressEnd}
+            >
+              <div className="m-progress-line">
+                <div className="m-progress-lineed" style={{ width: this.state.l + 'px' }}></div>
+              </div>
+              {/* 小球 */}
+              <div 
+                  className="m-progress-circle" ref={this.circle}
+                  style={{left: this.state.l + 'px'}}
+                  onTouchStart={this.start}
+                  onTouchMove={this.move}
+                  onTouchEnd={this.end}
+                ></div>
+            </div>
+            <span className="total-time">{formatTime(this.props.duration)}</span>
+          </div>
+          <div className="m-play-control">
+            <div 
+              onClick={this.props.prevSong}
+            ><img src={require('../../img/lpro.png')}/></div>
+            <div
+            
+              onClick={this.props.playOrPause}
+            >{this.props.isPlay?<img src={require('../../img/lplay.png')}/>:<img src={require('../../img/lstop.png')}/>}</div>
+            <div 
+            
+              onClick={this.props.nextSong}
+            ><img src={require('../../img/lnext.png')}/></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}

@@ -1,0 +1,13 @@
+.plist-img{
+    width: 100%;
+    height: 12.5rem;
+    
+    overflow: hidden;
+}
+.plist-list{
+    margin-top: 3.5rem
+}
+.plistlist-img img{
+    width: 4rem;
+    height: 4rem;
+}
